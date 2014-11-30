@@ -118,17 +118,6 @@
      ;; ( ,(regexp-opt idp-events 'words) . font-lock-constant-face)
      ))
 
-;; command to comment/uncomment text
-(defun idp-comment-dwim (arg)
-  "Comment or uncomment current line or region in a smart way.
-For detail, see `comment-dwim'."
-  (interactive "*P")
-  (require 'newcomment)
-  (let (
-        (comment-start "/*") (comment-end "*/")
-        )
-    (comment-dwim arg)))
-
 ;; syntax table
 (defvar idp-syntax-table nil "Syntax table for IDP-Mode.")
 (setq idp-syntax-table
@@ -155,8 +144,8 @@ For detail, see `comment-dwim'."
   (when idp-tab-width
     (setq tab-width idp-tab-width))
 
-  ;; modify the keymap
-  (define-key idp-mode-map [remap comment-dwim] 'idp-comment-dwim)
+  (setq comment-start "/*")
+  (setq comment-end "*/")
   )
 
 
