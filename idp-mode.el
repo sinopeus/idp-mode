@@ -99,23 +99,16 @@
 
 (defvar idp-lua-types-regexp (regexp-opt idp-lua-types 'words))
 
-;; I'd probably put in a default that you want, as opposed to nil
+;; Default tab width
 (defvar idp-tab-width 4 "Width of a tab for IDP mode")
 
-;; Two small edits.
-;; First is to put an extra set of parens () around the list
-;; which is the format that font-lock-defaults wants
-;; Second, you used ' (quote) at the outermost level where you wanted ` (backquote)
-;; you were very close
 (defvar idp-font-lock-defaults
   `(
      ("\"\\.\\*\\?" . font-lock-string-face) ;; strings
-     ;; (":\\|{\\|}" . font-lock-keyword-face) ;\;\ delimiters **/
      ("~" . font-lock-negation-char-face)
      (,idp-keywords-regexp . font-lock-keyword-face)
      (,idp-logical-operators-regexp . font-lock-builtin-face)
      (,idp-builtin-types-regexp . font-lock-type-face)
-     ;; ( ,(regexp-opt idp-events 'words) . font-lock-constant-face)
      ))
 
 ;; syntax table
@@ -134,13 +127,8 @@
 (define-derived-mode idp-mode prog-mode "IDP-Mode"
   "IDP mode is a major mode for editing IDP programs"
   :syntax-table idp-syntax-table
-  ;; you again used quote when you had '((idp-hilite))
-  ;; I just updated the variable to have the proper nesting (as noted above)
-  ;; and use the value directly here
   (setq font-lock-defaults '((idp-font-lock-defaults)))
   
-  ;; when there's an override, use it
-  ;; otherwise it gets the default value
   (when idp-tab-width
     (setq tab-width idp-tab-width))
 
