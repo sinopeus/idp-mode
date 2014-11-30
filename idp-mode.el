@@ -2,10 +2,6 @@
 ;; Author: Xavier Goás Aguililla
 ;; License: GNU GPL v3
 
-;; (defvar idp-events
-;;   '("reservedword1"
-;;     "reservedword2"))
-
 (defvar idp-keywords
   '("namespace" 
     "include"
